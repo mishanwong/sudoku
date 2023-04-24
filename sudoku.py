@@ -113,7 +113,6 @@ def main():
         sys.exit("Usage: python sudoku.py input.txt")
 
     input_file = sys.argv[1]
-    print(input_file)
 
     # Parse command-line arguments
     puzzle = []
@@ -125,7 +124,19 @@ def main():
             puzzle.append(row)
 
     # Check that the puzzle is valid
-    # TODO:
+    # Check that it has 9 rows and 9 columns
+    if len(puzzle) != 9:
+        sys.exit("Puzzle has incorrect number of rows")
+
+    for row in puzzle:
+        if len(row) != 9:
+            sys.exit("Puzzle has incorrect number of columns")
+
+    # Check that puzzle only contains numbers for 0 - 9
+    puzzle = np.array(puzzle)
+    check = ~np.isin(puzzle, range(0, 10))
+    if check.any():
+        sys.exit("Puzzle has invalid input")
 
     solver = SudokuSolver(np.array(puzzle))
     solver.solve()

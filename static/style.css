@@ -1,0 +1,66 @@
+#number-pad {
+    display: flex;
+    flex-wrap: wrap;
+    width: 96px;
+    height: 96px;
+    border: 1px solid green;
+    margin-top: 20px;
+}
+
+.number {
+    border: 1px solid grey;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    line-height: 30px;
+}
+
+#game-board {
+    display: flex;
+    flex-wrap: wrap;
+    border: 3px solid green;
+    height: 292px;
+    width: 292px
+}
+
+#button-row {
+    display: flex;
+
+}
+
+button {
+    height: 40px;
+    width: 80px;
+    /* background-color: bisque; */
+    border: 2px solid grey;
+    margin-top: 30px;
+    margin-right: 10px;
+}
+
+#solve-button {
+    background-color: antiquewhite;
+}
+
+#reset-button {
+    background-color: coral;
+}
+
+.tile {
+    border: 1px solid green;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    line-height: 30px;
+}
+
+.thick-right-border {
+    border-right: 3px solid green;
+}
+
+.thick-bottom-border {
+    border-bottom: 3px solid green;
+}
+
+.selected-number {
+    background-color: lightblue;
+}

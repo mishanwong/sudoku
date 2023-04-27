@@ -64,6 +64,7 @@ class SudokuSolver:
         """
         Function that returns True if none of the numbers violate the rule of sudoku and False if otherwise
         """
+        puzzle = np.array(puzzle)
         # Check each row horizontally
         for row in puzzle:
             if not self._check_consistent_helper(row):
@@ -97,6 +98,10 @@ class SudokuSolver:
                 return False
 
         return True
+
+    def check_empty_input(self, puzzle):
+        """Returns a boolean to check if a puzzle is completely empty"""
+        return np.all(puzzle == 0)
 
     def is_possible(self, puzzle, row, col, n):
         """Function that checks if it is possible to put the number n into position (row, col) in the puzzle"""
@@ -154,60 +159,60 @@ class SudokuSolver:
         return list(sorted_result.keys())[0] if sorted_result else None
 
 
-def main():
-    # Check usage
-    if len(sys.argv) != 2:
-        sys.exit("Usage: python sudoku.py input.txt")
+# def main():
+#     # Check usage
+#     if len(sys.argv) != 2:
+#         sys.exit("Usage: python sudoku.py input.txt")
 
-    input_file = sys.argv[1]
+#     input_file = sys.argv[1]
 
-    # Parse command-line arguments
-    puzzle = []
-    with open(input_file) as f:
-        row = []
-        content = f.read().splitlines()
-        for r in content:
-            row = list(map(int, r.split(",")))
-            puzzle.append(row)
+#     # Parse command-line arguments
+#     puzzle = []
+#     with open(input_file) as f:
+#         row = []
+#         content = f.read().splitlines()
+#         for r in content:
+#             row = list(map(int, r.split(",")))
+#             puzzle.append(row)
 
-    # Check that the puzzle is valid
-    # Check that it has 9 rows and 9 columns
-    if len(puzzle) != 9:
-        sys.exit("Puzzle has incorrect number of rows")
+#     # Check that the puzzle is valid
+#     # Check that it has 9 rows and 9 columns
+#     if len(puzzle) != 9:
+#         sys.exit("Puzzle has incorrect number of rows")
 
-    for row in puzzle:
-        if len(row) != 9:
-            sys.exit("Puzzle has incorrect number of columns")
+#     for row in puzzle:
+#         if len(row) != 9:
+#             sys.exit("Puzzle has incorrect number of columns")
 
-    # Check that puzzle only contains numbers for 0 - 9
-    puzzle = np.array(puzzle)
-    check = ~np.isin(puzzle, range(0, 10))
-    if check.any():
-        sys.exit("Puzzle has invalid input")
+#     # Check that puzzle only contains numbers for 0 - 9
+#     puzzle = np.array(puzzle)
+#     check = ~np.isin(puzzle, range(0, 10))
+#     if check.any():
+#         sys.exit("Puzzle has invalid input")
 
-    solver = SudokuSolver(np.array(puzzle))
+#     solver = SudokuSolver(np.array(puzzle))
 
-    solver.degress_of_freedom(puzzle)
+#     solver.degress_of_freedom(puzzle)
 
-    start_time = time.time()
-    # solver.solve()
-    solver.solve_optimized()
-    end_time = time.time()
+#     start_time = time.time()
+#     # solver.solve()
+#     solver.solve_optimized()
+#     end_time = time.time()
 
-    print("Execution time: {:.4f}".format(end_time - start_time))
-    print(f"Number of calls: {solver.count}")
+#     print("Execution time: {:.4f}".format(end_time - start_time))
+#     print(f"Number of calls: {solver.count}")
 
-    num_solutions = len(solver.solutions)
-    if not solver.solutions:
-        print("No solution!")
-    elif num_solutions == 1:
-        print(f"There is {num_solutions} solution!")
-        print(solver.solutions[0])
-    else:
-        print(f"There are {num_solutions} solutions!")
-        for solution in solver.solutions:
-            print(solution)
+#     num_solutions = len(solver.solutions)
+#     if not solver.solutions:
+#         print("No solution!")
+#     elif num_solutions == 1:
+#         print(f"There is {num_solutions} solution!")
+#         print(list(solver.solutions[0]))
+#     else:
+#         print(f"There are {num_solutions} solutions!")
+#         for solution in solver.solutions:
+#             print(solution)
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

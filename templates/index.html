@@ -11,17 +11,22 @@
 </head>
 
 <body>
-    <h3>Sudoku Solver</h3>
-    <div id="game">
-        <div id="game-board"></div>
-
-
-        <div id="number-pad"></div>
-        <div id="button-row">
-            <button id="solve-button">Solve!</button>
-            <button id="reset-button">Reset</button>
-            <button id="remove-number">Remove number</button>
+    <div id="input-half">
+        <h3>Sudoku Solver</h3>
+        <div id="spinner"></div>
+        <div id="game">
+            <div id="game-board"></div>
+            <div id="number-pad"></div>
+            <div id="button-row">
+                <button id="solve-button">Solve!</button>
+                <button id="reset-button">Reset</button>
+                <button id="remove-number">Remove number</button>
+            </div>
         </div>
+    </div>
+    <div id="solution-half">
+        <h3 id="solution-title"></h3>
+        <div id="solution-board"></div>
     </div>
 
 </body>

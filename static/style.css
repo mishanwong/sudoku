@@ -1,3 +1,48 @@
+body {
+    display: flex;
+}
+
+#spinner {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -25px;
+    margin-top: -25px;
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#solution-half {
+    width: 100%;
+    margin-left: 20px;
+}
+
+#solution-board {
+    display: flex;
+    flex-wrap: wrap;
+    height: 292px;
+    width: 292px;
+}
+
+.thick-board-border {
+    border: 3px solid green;
+}
+
 #number-pad {
     display: flex;
     flex-wrap: wrap;

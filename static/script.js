@@ -1,6 +1,8 @@
 let numSelected = null
 let cellSelected = null
 let removingNumber = false
+let solutionDisplayed = false
+
 const puzzle = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -12,6 +14,19 @@ const puzzle = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
+
+const testPuzzle = [
+    [6, 0, 0, 9, 0, 0, 0, 0, 8],
+    [0, 0, 0, 0, 0, 0, 4, 3, 0],
+    [1, 0, 0, 0, 4, 0, 0, 9, 0],
+    [5, 0, 0, 8, 0, 0, 0, 0, 7],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 0, 0, 0, 2, 0, 0, 9],
+    [0, 7, 0, 5, 0, 0, 0, 0, 1],
+    [0, 3, 0, 4, 0, 0, 0, 0, 0],
+    [0, 2, 0, 0, 8, 0, 7, 0, 3]
+]
+let solvedPuzzle = null
 
 window.onload = function () {
     setGame()
@@ -50,7 +65,6 @@ function setGame() {
                     // Remove number if cell is already filled
                     puzzle[row][col] = 0
                     cell.innerHTML = ""
-                    console.log(puzzle)
                 }
             })
         }
@@ -81,8 +95,43 @@ function setGame() {
     }
 
     const solveButton = document.getElementById("solve-button")
+    const spinner = document.getElementById("spinner")
     solveButton.addEventListener('click', () => {
-        console.log(puzzle)
+        fetch('/check_input', {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json"
+            },
+            body: JSON.stringify(puzzle)
+        }).then(response => {
+            return response.json()
+        }).then(data => {
+            if (data.isConsistent === "False") {
+                alert("Sudoku puzzle is invalid")
+            } else if (data.isEmpty === "True") {
+                alert("Please enter a Sudoku puzzle")
+            } else {
+                // Input is valid
+                document.body.style.cursor = "wait"
+                spinner.style.display = "block"
+                fetch('/solve', {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': "application/json"
+                    },
+                    body: JSON.stringify(puzzle)
+                }).then(response => {
+                    return response.json()
+                }).then(data => {
+                    solvedPuzzle = data
+                    displaySolution(data)
+                    spinner.style.display = "none"
+                    document.body.style.cursor = "default"
+                }).catch(error => {
+                    console.error(error)
+                })
+            }
+        })
     })
 
     const resetButton = document.getElementById("reset-button")
@@ -99,6 +148,28 @@ function setGame() {
                 tile.innerText = ""
             }
         }
+
+        // Reset numSelected
+        numSelected = null
+        for (let i = 1; i < 10; i++) {
+            const number = document.getElementById(i)
+            number.classList.remove("selected-number")
+        }
+
+        // If there is a solution, clear the solution
+        if (solutionDisplayed) {
+            const solutionTitle = document.getElementById("solution-title")
+            solutionTitle.innerText = ""
+
+
+            const solutionBoard = document.getElementById("solution-board")
+            solutionBoard.classList.remove("thick-board-border")
+            while (solutionBoard.firstChild) {
+                solutionBoard.removeChild(solutionBoard.firstChild)
+            }
+            solutionDisplayed = false
+        }
+
     })
 
     const removeNumberButton = document.getElementById("remove-number")
@@ -114,5 +185,34 @@ function setGame() {
         }
     })
 
+    function displaySolution(solution) {
+        if (!solutionDisplayed) {
+            solutionDisplayed = true
+            const title = document.getElementById("solution-title")
+            title.innerText = "Solution"
+
+            const solutionBoard = document.getElementById("solution-board")
+            solutionBoard.classList.add("thick-board-border")
+
+            for (let row = 0; row < 9; row++) {
+                for (let col = 0; col < 9; col++) {
+                    const solutionCell = document.createElement('div')
+                    solutionCell.id = `sol${row}${col}`
+                    solutionCell.classList.add("tile")
+                    solutionCell.innerText = solution[row][col]
+
+                    const solutionBoard = document.getElementById("solution-board")
+                    solutionBoard.appendChild(solutionCell)
+                    if (gridBorder.includes(row)) {
+                        solutionCell.classList.add("thick-bottom-border")
+                    }
+                    if (gridBorder.includes(col)) {
+                        solutionCell.classList.add("thick-right-border")
+                    }
+                }
+            }
+        }
+
+    }
 }
 

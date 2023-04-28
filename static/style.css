@@ -1,5 +1,6 @@
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     height: 100vh;
     width: 100vw;
@@ -46,8 +47,8 @@ body {
 #solution-board {
     display: flex;
     flex-wrap: wrap;
-    height: 292px;
-    width: 292px;
+    height: 270px;
+    width: 270px;
 }
 
 .thick-board-border {
@@ -57,8 +58,8 @@ body {
 #number-pad {
     display: flex;
     flex-wrap: wrap;
-    width: 96px;
-    height: 96px;
+    width: 90px;
+    height: 90px;
     border: 1px solid green;
     margin-top: 20px;
 }
@@ -69,14 +70,15 @@ body {
     width: 30px;
     text-align: center;
     line-height: 30px;
+    box-sizing: border-box;
 }
 
 #game-board {
     display: flex;
     flex-wrap: wrap;
     border: 3px solid green;
-    height: 292px;
-    width: 292px
+    height: 270px;
+    width: 270px
 }
 
 #button-row {
@@ -106,6 +108,7 @@ button {
     width: 30px;
     text-align: center;
     line-height: 30px;
+    box-sizing: border-box;
 }
 
 .thick-right-border {

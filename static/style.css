@@ -85,7 +85,6 @@ body {
 
 #button-row {
     display: flex;
-
 }
 
 button {
@@ -102,6 +101,10 @@ button {
 
 #reset-button {
     background-color: coral;
+}
+
+#sample-puzzle {
+    background-color: darkkhaki;
 }
 
 .tile {

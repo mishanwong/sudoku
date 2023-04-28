@@ -3,7 +3,7 @@ let cellSelected = null
 let removingNumber = false
 let solutionDisplayed = false
 
-const puzzle = [
+let puzzle = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -183,6 +183,19 @@ function setGame() {
         }
     })
 
+    const samplePuzzleButton = document.getElementById("sample-puzzle")
+    samplePuzzleButton.addEventListener('click', () => {
+        // Fill in the numbers
+        for (let i = 0; i < 9; i++) {
+            for (let j = 0; j < 9; j++) {
+                puzzle[i][j] = testPuzzle[i][j]
+                const cell = document.getElementById(i.toString() + j.toString())
+                if (puzzle[i][j] !== 0) {
+                    cell.innerText = puzzle[i][j]
+                }
+            }
+        }
+    })
     function displaySolution(solution) {
         if (!solutionDisplayed) {
             solutionDisplayed = true

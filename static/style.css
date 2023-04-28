@@ -1,5 +1,8 @@
 body {
     display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
 }
 
 #spinner {
@@ -27,9 +30,17 @@ body {
     }
 }
 
+#input-half {
+    margin-left: 30px;
+    flex-basis: 0;
+    flex-grow: 1;
+}
+
 #solution-half {
     width: 100%;
-    margin-left: 20px;
+    padding-left: 30px;
+    flex-basis: 0;
+    flex-grow: 1;
 }
 
 #solution-board {
@@ -76,7 +87,6 @@ body {
 button {
     height: 40px;
     width: 80px;
-    /* background-color: bisque; */
     border: 2px solid grey;
     margin-top: 30px;
     margin-right: 10px;

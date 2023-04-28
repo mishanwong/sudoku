@@ -26,7 +26,6 @@ const testPuzzle = [
     [0, 3, 0, 4, 0, 0, 0, 0, 0],
     [0, 2, 0, 0, 8, 0, 7, 0, 3]
 ]
-let solvedPuzzle = null
 
 window.onload = function () {
     setGame()
@@ -123,7 +122,6 @@ function setGame() {
                 }).then(response => {
                     return response.json()
                 }).then(data => {
-                    solvedPuzzle = data
                     displaySolution(data)
                     spinner.style.display = "none"
                     document.body.style.cursor = "default"

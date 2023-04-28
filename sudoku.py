@@ -1,8 +1,6 @@
 import numpy as np
 from collections import Counter
 import copy
-import sys
-import time
 
 
 class SudokuSolver:
@@ -54,7 +52,7 @@ class SudokuSolver:
         if np.any(puzzle == 0):
             return False
 
-        # Check if it's consisten
+        # Check if it's consistent
         if self.check_consistent(puzzle) == False:
             return False
 
@@ -157,62 +155,3 @@ class SudokuSolver:
 
         sorted_result = dict(sorted(result.items(), key=lambda item: item[1]))
         return list(sorted_result.keys())[0] if sorted_result else None
-
-
-# def main():
-#     # Check usage
-#     if len(sys.argv) != 2:
-#         sys.exit("Usage: python sudoku.py input.txt")
-
-#     input_file = sys.argv[1]
-
-#     # Parse command-line arguments
-#     puzzle = []
-#     with open(input_file) as f:
-#         row = []
-#         content = f.read().splitlines()
-#         for r in content:
-#             row = list(map(int, r.split(",")))
-#             puzzle.append(row)
-
-#     # Check that the puzzle is valid
-#     # Check that it has 9 rows and 9 columns
-#     if len(puzzle) != 9:
-#         sys.exit("Puzzle has incorrect number of rows")
-
-#     for row in puzzle:
-#         if len(row) != 9:
-#             sys.exit("Puzzle has incorrect number of columns")
-
-#     # Check that puzzle only contains numbers for 0 - 9
-#     puzzle = np.array(puzzle)
-#     check = ~np.isin(puzzle, range(0, 10))
-#     if check.any():
-#         sys.exit("Puzzle has invalid input")
-
-#     solver = SudokuSolver(np.array(puzzle))
-
-#     solver.degress_of_freedom(puzzle)
-
-#     start_time = time.time()
-#     # solver.solve()
-#     solver.solve_optimized()
-#     end_time = time.time()
-
-#     print("Execution time: {:.4f}".format(end_time - start_time))
-#     print(f"Number of calls: {solver.count}")
-
-#     num_solutions = len(solver.solutions)
-#     if not solver.solutions:
-#         print("No solution!")
-#     elif num_solutions == 1:
-#         print(f"There is {num_solutions} solution!")
-#         print(list(solver.solutions[0]))
-#     else:
-#         print(f"There are {num_solutions} solutions!")
-#         for solution in solver.solutions:
-#             print(solution)
-
-
-# if __name__ == "__main__":
-#     main()

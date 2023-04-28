@@ -13,3 +13,9 @@ Try it out here: https://sudopro-sudoku-solver.herokuapp.com
 4. Install dependecies by running `pip install -r requirements.txt`
 5. Start the server by running `flask run`
 6. View the application at http://127.0.0.1:5000/
+
+## Screenshots
+![Screenshot 2023-04-28 at 1 18 25 PM](https://user-images.githubusercontent.com/32437766/235245853-06acb1a6-ecce-4856-b282-bd0ffa29a1da.png)
+
+![Screenshot 2023-04-28 at 1 20 13 PM](https://user-images.githubusercontent.com/32437766/235245875-af64bccf-8757-44fe-9d47-6320ce009e80.png)
+
